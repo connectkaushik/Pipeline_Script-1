@@ -8,6 +8,7 @@ pipeline {
                 }
         steps {
                 echo 'This stage will be executed first'
+		build.bat
                 }
         }
 
@@ -16,10 +17,11 @@ pipeline {
             parallel {
                 stage('Test On Windows') {
                     agent {
-                        label "Windows_Node"
+                        label "master"
                     }
                     steps {
                         echo "Task1 on Agent"
+			    unit.bat
                     }
                     
                 }
@@ -29,6 +31,7 @@ pipeline {
                     }
                     steps {
 						echo "Task1 on Master"
+			    deploy.bat
 					}
                 }
             }
